@@ -15,7 +15,7 @@ export default async function HomePage() {
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white border-b sticky top-0 z-10">
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-          <h1 className="text-xl font-bold text-gray-900">LP Tracker</h1>
+          <h1 className="text-xl font-bold text-gray-900">What NOW?</h1>
           <div className="flex items-center gap-3">
             <NewProjectDialog />
             <LogoutButton />

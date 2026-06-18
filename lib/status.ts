@@ -8,12 +8,12 @@ export const STATUS_LABELS: Record<ProjectStatus, string> = {
   done: '完了',
 }
 
-export const STATUS_COLORS: Record<ProjectStatus, string> = {
-  designing: 'bg-blue-100 text-blue-800',
-  coding: 'bg-purple-100 text-purple-800',
-  reviewing: 'bg-yellow-100 text-yellow-800',
-  fixing: 'bg-orange-100 text-orange-800',
-  done: 'bg-green-100 text-green-800',
+export const STATUS_COLORS: Record<ProjectStatus, { bg: string; text: string }> = {
+  designing: { bg: '#A259FF22', text: '#A259FF' },
+  coding:    { bg: '#1ABCFE22', text: '#1ABCFE' },
+  reviewing: { bg: '#F24E1E22', text: '#F24E1E' },
+  fixing:    { bg: '#FF726222', text: '#FF7262' },
+  done:      { bg: '#0ACF8322', text: '#0ACF83' },
 }
 
 export const STATUS_OPTIONS: { value: ProjectStatus; label: string }[] = [

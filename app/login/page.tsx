@@ -34,7 +34,7 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl">LP Tracker</CardTitle>
+          <CardTitle className="text-2xl">What NOW?</CardTitle>
           <p className="text-sm text-gray-500 mt-1">制作進捗管理</p>
         </CardHeader>
         <CardContent>
