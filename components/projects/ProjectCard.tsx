@@ -12,13 +12,9 @@ export function ProjectCard({ project }: { project: Project }) {
     <Link href={`/projects/${project.id}`}>
       <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
         <CardHeader className="pb-2">
-          <div className="flex items-start justify-between gap-2">
-            <div>
-              <h3 className="font-semibold text-gray-900 leading-tight">{project.name}</h3>
-              <p className="text-sm text-gray-500 mt-0.5">{project.client}</p>
-            </div>
-            <StatusBadge status={project.status} />
-          </div>
+          <StatusBadge status={project.status} />
+          <h3 className="font-semibold text-gray-900 leading-tight mt-2">{project.name}</h3>
+          <p className="text-sm text-gray-500 mt-0.5">{project.client}</p>
         </CardHeader>
         <CardContent>
           <p className="text-xs text-gray-400">更新: {formatDate(project.updated_at)}</p>
