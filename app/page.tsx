@@ -29,7 +29,7 @@ export default async function HomePage() {
           {active.length === 0 ? (
             <p className="text-gray-400 text-sm">進行中の案件はありません</p>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="border rounded-lg overflow-hidden">
               {active.map((p) => <ProjectCard key={p.id} project={p} />)}
             </div>
           )}
@@ -37,7 +37,7 @@ export default async function HomePage() {
         {done.length > 0 && (
           <section>
             <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">完了 ({done.length})</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 opacity-60">
+            <div className="border rounded-lg overflow-hidden opacity-60">
               {done.map((p) => <ProjectCard key={p.id} project={p} />)}
             </div>
           </section>

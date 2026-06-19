@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { Project } from '@/types'
 import { StatusBadge } from './StatusBadge'
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
 
 function formatDate(d: string) {
   return new Date(d).toLocaleDateString('ja-JP', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
@@ -10,25 +9,14 @@ function formatDate(d: string) {
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <Link href={`/projects/${project.id}`}>
-      <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
-        <CardHeader className="pb-2">
-          <div className="flex items-start justify-between gap-2">
-            <div>
-              <h3 className="font-semibold text-gray-900 leading-tight">{project.name}</h3>
-              <p className="text-sm text-gray-500 mt-0.5">{project.client}</p>
-            </div>
-            <StatusBadge status={project.status} />
-          </div>
-        </CardHeader>
-        <CardContent>
-          <p className="text-xs text-gray-400">更新: {formatDate(project.updated_at)}</p>
-          <div className="flex gap-2 mt-2 flex-wrap">
-            {project.figma_url && <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">Figma</span>}
-            {project.staging_url && <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">Staging</span>}
-            {project.production_url && <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">本番</span>}
-          </div>
-        </CardContent>
-      </Card>
+      <div className="flex items-center gap-3 px-4 py-3 bg-white border-b hover:bg-gray-50 transition-colors cursor-pointer">
+        <div className="shrink-0 w-28">
+          <StatusBadge status={project.status} />
+        </div>
+        <p className="flex-1 font-medium text-gray-900 truncate">{project.name}</p>
+        <p className="shrink-0 w-28 text-sm text-gray-500 truncate">{project.client}</p>
+        <p className="shrink-0 w-32 text-xs text-gray-400 text-right">{formatDate(project.updated_at)}</p>
+      </div>
     </Link>
   )
 }
