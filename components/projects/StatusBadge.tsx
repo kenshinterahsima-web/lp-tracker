@@ -6,7 +6,7 @@ export function StatusBadge({ status }: { status: ProjectStatus }) {
   return (
     <span
       className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold"
-      style={{ backgroundColor: bg, color: text }}
+      style={{ backgroundColor: bg, color: text, width: 'fit-content' }}
     >
       {STATUS_LABELS[status]}
     </span>
