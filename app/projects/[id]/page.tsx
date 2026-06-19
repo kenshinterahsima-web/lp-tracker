@@ -46,7 +46,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
               <div className="space-y-4">
                 <div className="space-y-2">
                   <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#8a8a8f]">Project</p>
-                  <h1 className="text-2xl font-semibold leading-tight tracking-[-0.02em] text-[#1d1d1f]">{p.name}</h1>
+                  <h1 className="text-xl font-semibold leading-tight tracking-[-0.02em] text-[#1d1d1f]">{p.name}</h1>
                   <p className="text-sm leading-6 text-[#6e6e73]">{p.client}</p>
                 </div>
                 <StatusSelector projectId={p.id} currentStatus={p.status} />
@@ -66,7 +66,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             <section className="rounded-[6px] border border-black/5 bg-white/72 p-6 shadow-[0_18px_60px_rgba(0,0,0,0.045)] backdrop-blur">
               <div className="mb-5 space-y-1">
                 <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#8a8a8f]">New Log</p>
-                <h2 className="text-xl font-semibold tracking-[-0.02em] text-[#1d1d1f]">作業ログを追加</h2>
+                <h2 className="text-lg font-semibold tracking-[-0.02em] text-[#1d1d1f]">作業ログを追加</h2>
               </div>
               <LogForm projectId={p.id} defaultAuthor={defaultAuthor} />
             </section>
@@ -76,7 +76,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
               <div className="space-y-1">
                 <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#8a8a8f]">Work History</p>
-                <h2 className="text-2xl font-semibold tracking-[-0.02em] text-[#1d1d1f] sm:text-3xl">作業履歴</h2>
+                <h2 className="text-xl font-semibold tracking-[-0.02em] text-[#1d1d1f] sm:text-2xl">作業履歴</h2>
               </div>
               <p className="text-sm leading-6 text-[#6e6e73]">{logList.length}件のログがあります</p>
             </div>

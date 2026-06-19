@@ -161,7 +161,7 @@ export function ProjectBoard({ activeProjects, doneProjects }: ProjectBoardProps
         <div className="flex items-end justify-between gap-4">
           <div className="space-y-1">
             <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#8a8a8f]">Active Projects</p>
-            <h2 className="text-2xl font-semibold tracking-[-0.02em] text-[#1d1d1f] sm:text-3xl">進行中</h2>
+            <h2 className="text-xl font-semibold tracking-[-0.02em] text-[#1d1d1f] sm:text-2xl">進行中</h2>
             <p className="text-sm leading-6 text-[#6e6e73]">{active.length}件の案件を進行中です</p>
           </div>
           {active.length > 1 && (
@@ -195,7 +195,7 @@ export function ProjectBoard({ activeProjects, doneProjects }: ProjectBoardProps
               >
                 <div
                   className={cn(
-                    'h-full',
+                    dragState?.id !== project.id && 'h-full',
                     dragState?.id === project.id && 'pointer-events-none fixed z-50 opacity-100 shadow-xl transition-none'
                   )}
                   style={
@@ -204,6 +204,7 @@ export function ProjectBoard({ activeProjects, doneProjects }: ProjectBoardProps
                           left: dragState.pointerX - dragState.offsetX,
                           top: dragState.pointerY - dragState.offsetY,
                           width: dragState.width,
+                          height: dragState.height,
                         }
                       : undefined
                   }
@@ -236,7 +237,7 @@ export function ProjectBoard({ activeProjects, doneProjects }: ProjectBoardProps
         <section className="space-y-5">
           <div className="space-y-1">
             <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#8a8a8f]">Completed</p>
-            <h2 className="text-2xl font-semibold tracking-[-0.02em] text-[#1d1d1f] sm:text-3xl">完了</h2>
+            <h2 className="text-xl font-semibold tracking-[-0.02em] text-[#1d1d1f] sm:text-2xl">完了</h2>
             <p className="text-sm leading-6 text-[#6e6e73]">{done.length}件の案件が完了しています</p>
           </div>
           <div className="grid grid-cols-1 gap-4 opacity-55 sm:grid-cols-2 lg:grid-cols-3">

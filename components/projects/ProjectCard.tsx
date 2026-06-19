@@ -23,7 +23,7 @@ export function ProjectCard({ project, dragHandle, isDragging = false }: Project
         isDragging && 'scale-[1.02] bg-white opacity-95 shadow-[0_28px_90px_rgba(0,0,0,0.16)] ring-1 ring-black/10'
       )}
     >
-      <Link href={`/projects/${project.id}`} className="flex h-[220px] flex-col">
+      <Link href={`/projects/${project.id}`} className="flex h-full min-h-[220px] flex-col">
         <CardHeader className="px-5 pb-3 pt-5">
           <StatusBadge status={project.status} />
           <h3 className="mt-5 line-clamp-2 pr-9 text-xl font-semibold leading-tight tracking-[-0.02em] text-[#1d1d1f]" title={project.name}>{project.name}</h3>
