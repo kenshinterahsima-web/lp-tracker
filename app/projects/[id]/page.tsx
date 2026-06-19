@@ -53,10 +53,6 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
           {/* 右: 作業ログ */}
           <div className="space-y-6">
-            <div className="bg-white rounded-lg border p-6">
-              <h2 className="font-semibold text-gray-900 mb-4">作業ログを追加</h2>
-              <LogForm projectId={p.id} defaultAuthor={defaultAuthor} />
-            </div>
             <div>
               <h2 className="font-semibold text-gray-900 mb-4">作業履歴 ({logList.length}件)</h2>
               {logList.length === 0 ? (
@@ -74,6 +70,10 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                   ))}
                 </div>
               )}
+            </div>
+            <div className="bg-white rounded-lg border p-6">
+              <h2 className="font-semibold text-gray-900 mb-4">作業ログを追加</h2>
+              <LogForm projectId={p.id} defaultAuthor={defaultAuthor} />
             </div>
           </div>
 
