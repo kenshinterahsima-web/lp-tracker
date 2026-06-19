@@ -13,9 +13,9 @@ export default async function HomePage() {
   const done = all.filter((p) => p.status === 'done')
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b sticky top-0 z-10">
-        <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+    <div className="min-h-screen bg-[#f6f5f2] text-[#1d1d1f]">
+      <header className="sticky top-0 z-10 border-b border-black/5 bg-[#f6f5f2]/80 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-5 sm:px-6">
           <Image src="/logo.svg" alt="What NOW?" width={148} height={19} priority />
           <div className="flex items-center gap-3">
             <NewProjectDialog />
@@ -23,7 +23,7 @@ export default async function HomePage() {
           </div>
         </div>
       </header>
-      <main className="max-w-5xl mx-auto px-4 py-8">
+      <main className="mx-auto max-w-6xl px-5 py-10 sm:px-6 sm:py-14">
         <ProjectBoard activeProjects={active} doneProjects={done} />
       </main>
     </div>

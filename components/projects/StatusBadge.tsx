@@ -1,4 +1,4 @@
-import { ProjectStatus } from '@/types'
+import type { ProjectStatus } from '@/types'
 import { STATUS_LABELS, STATUS_COLORS } from '@/lib/status'
 
 export function StatusBadge({ status }: { status: ProjectStatus }) {

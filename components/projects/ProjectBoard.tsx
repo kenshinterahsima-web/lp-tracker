@@ -156,28 +156,40 @@ export function ProjectBoard({ activeProjects, doneProjects }: ProjectBoardProps
   }
 
   return (
-    <div className="space-y-10">
-      <section>
-        <div className="mb-4 flex items-center justify-between gap-3">
-          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide">進行中 ({active.length})</h2>
+    <div className="space-y-12">
+      <section className="space-y-5">
+        <div className="flex items-end justify-between gap-4">
+          <div className="space-y-1">
+            <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#8a8a8f]">Active Projects</p>
+            <h2 className="text-2xl font-semibold tracking-[-0.02em] text-[#1d1d1f] sm:text-3xl">進行中</h2>
+            <p className="text-sm leading-6 text-[#6e6e73]">{active.length}件の案件を進行中です</p>
+          </div>
           {active.length > 1 && (
-            <Button type="button" variant="ghost" size="sm" onClick={handleResetOrder}>
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="rounded-full border border-black/10 bg-white/60 px-3 text-[#515154] shadow-sm backdrop-blur hover:bg-white hover:text-[#1d1d1f]"
+              onClick={handleResetOrder}
+            >
               <RotateCcw aria-hidden="true" />
               更新順に戻す
             </Button>
           )}
         </div>
         {active.length === 0 ? (
-          <p className="text-gray-400 text-sm">進行中の案件はありません</p>
+          <div className="rounded-[28px] border border-black/5 bg-white/65 px-6 py-10 text-sm text-[#8a8a8f] shadow-[0_18px_60px_rgba(0,0,0,0.04)]">
+            進行中の案件はありません
+          </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {active.map((project) => (
               <div
                 key={project.id}
                 data-project-id={project.id}
                 className={cn(
                   'transition-transform duration-150 ease-out',
-                  dragState?.id === project.id && 'rounded-lg border border-dashed border-gray-200 bg-gray-100/70'
+                  dragState?.id === project.id && 'rounded-[28px] border border-dashed border-black/10 bg-white/45'
                 )}
                 style={dragState?.id === project.id ? { height: dragState.height } : undefined}
               >
@@ -204,8 +216,8 @@ export function ProjectBoard({ activeProjects, doneProjects }: ProjectBoardProps
                         aria-label={`${project.name}を並び替え`}
                         title="押したままドラッグして並び替え"
                         className={cn(
-                          'absolute right-3 top-3 z-10 flex size-8 touch-none cursor-grab items-center justify-center rounded-md border border-gray-200 bg-white text-gray-400 shadow-sm transition hover:border-gray-300 hover:text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-300 active:cursor-grabbing',
-                          dragState?.id === project.id && 'cursor-grabbing text-gray-700'
+                          'absolute right-4 top-4 z-10 flex size-9 touch-none cursor-grab items-center justify-center rounded-full border border-black/5 bg-white/80 text-[#8a8a8f] shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur transition hover:bg-white hover:text-[#1d1d1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/10 active:cursor-grabbing',
+                          dragState?.id === project.id && 'cursor-grabbing bg-white text-[#1d1d1f]'
                         )}
                         onPointerDown={(event) => handleDragStart(project.id, event)}
                       >
@@ -220,9 +232,13 @@ export function ProjectBoard({ activeProjects, doneProjects }: ProjectBoardProps
         )}
       </section>
       {done.length > 0 && (
-        <section>
-          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">完了 ({done.length})</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 opacity-60">
+        <section className="space-y-5">
+          <div className="space-y-1">
+            <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#8a8a8f]">Completed</p>
+            <h2 className="text-2xl font-semibold tracking-[-0.02em] text-[#1d1d1f] sm:text-3xl">完了</h2>
+            <p className="text-sm leading-6 text-[#6e6e73]">{done.length}件の案件が完了しています</p>
+          </div>
+          <div className="grid grid-cols-1 gap-4 opacity-55 sm:grid-cols-2 lg:grid-cols-3">
             {done.map((project) => <ProjectCard key={project.id} project={project} />)}
           </div>
         </section>
