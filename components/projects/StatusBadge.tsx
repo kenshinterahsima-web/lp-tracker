@@ -5,7 +5,7 @@ export function StatusBadge({ status }: { status: ProjectStatus }) {
   const { bg, text } = STATUS_COLORS[status]
   return (
     <span
-      className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold"
+      className="inline-flex items-center rounded-[6px] px-2.5 py-0.5 text-xs font-semibold"
       style={{ backgroundColor: bg, color: text, width: 'fit-content' }}
     >
       {STATUS_LABELS[status]}

@@ -169,7 +169,7 @@ export function ProjectBoard({ activeProjects, doneProjects }: ProjectBoardProps
               type="button"
               variant="ghost"
               size="sm"
-              className="rounded-full border border-black/10 bg-white/60 px-3 text-[#515154] shadow-sm backdrop-blur hover:bg-white hover:text-[#1d1d1f]"
+              className="rounded-[6px] border border-black/10 bg-white/60 px-3 text-[#515154] shadow-sm backdrop-blur hover:bg-white hover:text-[#1d1d1f]"
               onClick={handleResetOrder}
             >
               <RotateCcw aria-hidden="true" />
@@ -178,7 +178,7 @@ export function ProjectBoard({ activeProjects, doneProjects }: ProjectBoardProps
           )}
         </div>
         {active.length === 0 ? (
-          <div className="rounded-[28px] border border-black/5 bg-white/65 px-6 py-10 text-sm text-[#8a8a8f] shadow-[0_18px_60px_rgba(0,0,0,0.04)]">
+          <div className="rounded-[6px] border border-black/5 bg-white/65 px-6 py-10 text-sm text-[#8a8a8f] shadow-[0_18px_60px_rgba(0,0,0,0.04)]">
             進行中の案件はありません
           </div>
         ) : (
@@ -188,13 +188,14 @@ export function ProjectBoard({ activeProjects, doneProjects }: ProjectBoardProps
                 key={project.id}
                 data-project-id={project.id}
                 className={cn(
-                  'transition-transform duration-150 ease-out',
-                  dragState?.id === project.id && 'rounded-[28px] border border-dashed border-black/10 bg-white/45'
+                  'h-full transition-transform duration-150 ease-out',
+                  dragState?.id === project.id && 'rounded-[6px] border border-dashed border-black/10 bg-white/45'
                 )}
                 style={dragState?.id === project.id ? { height: dragState.height } : undefined}
               >
                 <div
                   className={cn(
+                    'h-full',
                     dragState?.id === project.id && 'pointer-events-none fixed z-50 opacity-100 shadow-xl transition-none'
                   )}
                   style={
@@ -216,7 +217,7 @@ export function ProjectBoard({ activeProjects, doneProjects }: ProjectBoardProps
                         aria-label={`${project.name}を並び替え`}
                         title="押したままドラッグして並び替え"
                         className={cn(
-                          'absolute right-4 top-4 z-10 flex size-9 touch-none cursor-grab items-center justify-center rounded-full border border-black/5 bg-white/80 text-[#8a8a8f] shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur transition hover:bg-white hover:text-[#1d1d1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/10 active:cursor-grabbing',
+                          'absolute right-4 top-4 z-10 flex size-9 touch-none cursor-grab items-center justify-center rounded-[6px] border border-black/5 bg-white/80 text-[#8a8a8f] shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur transition hover:bg-white hover:text-[#1d1d1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/10 active:cursor-grabbing',
                           dragState?.id === project.id && 'cursor-grabbing bg-white text-[#1d1d1f]'
                         )}
                         onPointerDown={(event) => handleDragStart(project.id, event)}

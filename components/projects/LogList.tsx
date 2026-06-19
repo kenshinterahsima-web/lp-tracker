@@ -26,7 +26,11 @@ export function LogList({ logs: initialLogs, projectId }: { logs: Log[]; project
   }
 
   if (logs.length === 0) {
-    return <p className="text-sm text-gray-400">まだログがありません</p>
+    return (
+      <div className="rounded-[6px] border border-black/5 bg-white/65 px-6 py-10 text-sm text-[#8a8a8f] shadow-[0_18px_60px_rgba(0,0,0,0.04)]">
+        まだログがありません
+      </div>
+    )
   }
 
   return (
@@ -34,17 +38,17 @@ export function LogList({ logs: initialLogs, projectId }: { logs: Log[]; project
       {logs.map((log) => (
         <div
           key={log.id}
-          className="relative bg-white rounded-lg border border-gray-200 overflow-hidden"
+          className="relative overflow-hidden rounded-[6px] border border-black/5 bg-white/72 shadow-[0_18px_60px_rgba(0,0,0,0.045)] backdrop-blur transition hover:bg-white hover:shadow-[0_24px_70px_rgba(0,0,0,0.08)]"
           style={{ borderLeft: '4px solid #A259FF' }}
         >
           {log.done && (
-            <div className="absolute inset-0 bg-gray-100/80 rounded-lg pointer-events-none z-10" />
+            <div className="absolute inset-0 z-10 rounded-[6px] bg-[#f5f5f7]/80 pointer-events-none" />
           )}
-          <div className="p-4 flex items-start gap-3">
+          <div className="flex items-start gap-3 p-5">
             {/* チェックボタン */}
             <button
               onClick={() => handleToggle(log.id, log.done)}
-              className="mt-0.5 shrink-0 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors"
+              className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-[6px] border-2 transition-colors"
               style={{
                 borderColor: log.done ? '#0ACF83' : '#d1d5db',
                 backgroundColor: log.done ? '#0ACF83' : 'white',
@@ -59,13 +63,13 @@ export function LogList({ logs: initialLogs, projectId }: { logs: Log[]; project
 
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-between gap-2 mb-1">
-                <span className="text-sm font-semibold text-gray-800">{log.author}</span>
+                <span className="text-sm font-semibold text-[#1d1d1f]">{log.author}</span>
                 <div className="flex items-center gap-2 shrink-0">
-                  <span className="text-xs text-gray-400">{fmt(log.created_at)}</span>
+                  <span className="text-xs font-medium text-[#8a8a8f]">{fmt(log.created_at)}</span>
                   {/* 削除ボタン */}
                   <button
                     onClick={() => handleDelete(log.id)}
-                    className="text-gray-300 hover:text-red-400 transition-colors"
+                    className="rounded-[6px] p-1 text-[#b4b4b8] transition-colors hover:bg-[#f5f5f7] hover:text-red-400"
                     title="削除"
                   >
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -77,7 +81,7 @@ export function LogList({ logs: initialLogs, projectId }: { logs: Log[]; project
               <p
                 className="text-sm whitespace-pre-wrap leading-relaxed"
                 style={{
-                  color: log.done ? '#9ca3af' : '#374151',
+                  color: log.done ? '#9ca3af' : '#515154',
                   textDecoration: log.done ? 'line-through' : 'none',
                 }}
               >

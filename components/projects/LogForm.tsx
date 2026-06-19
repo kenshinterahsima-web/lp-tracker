@@ -26,16 +26,28 @@ export function LogForm({ projectId, defaultAuthor }: { projectId: string; defau
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3">
-      <div className="space-y-1.5">
-        <Label htmlFor="author" className="text-sm">投稿者名</Label>
-        <Input id="author" value={author} onChange={(e) => setAuthor(e.target.value)} className="h-8 text-sm max-w-xs" />
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="space-y-2">
+        <Label htmlFor="author" className="text-sm font-medium text-[#515154]">投稿者名</Label>
+        <Input
+          id="author"
+          value={author}
+          onChange={(e) => setAuthor(e.target.value)}
+          className="h-9 max-w-xs rounded-[6px] border-black/10 bg-white/70 text-sm"
+        />
       </div>
-      <div className="space-y-1.5">
-        <Label htmlFor="content" className="text-sm">作業ログ</Label>
-        <Textarea id="content" value={content} onChange={(e) => setContent(e.target.value)} placeholder="例: トップビジュアルのデザイン修正完了。スマホ対応も調整済み。" rows={3} className="text-sm resize-none" />
+      <div className="space-y-2">
+        <Label htmlFor="content" className="text-sm font-medium text-[#515154]">作業ログ</Label>
+        <Textarea
+          id="content"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          placeholder="例: トップビジュアルのデザイン修正完了。スマホ対応も調整済み。"
+          rows={3}
+          className="resize-none rounded-[6px] border-black/10 bg-white/70 text-sm"
+        />
       </div>
-      <Button type="submit" size="sm" disabled={loading || !content.trim()}>
+      <Button type="submit" size="sm" className="rounded-[6px]" disabled={loading || !content.trim()}>
         {loading ? '投稿中...' : '投稿する'}
       </Button>
     </form>

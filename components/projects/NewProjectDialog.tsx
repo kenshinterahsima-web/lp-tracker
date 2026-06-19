@@ -9,9 +9,13 @@ import { Label } from '@/components/ui/label'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select'
 import { STATUS_OPTIONS, STATUS_LABELS } from '@/lib/status'
-import { ProjectStatus } from '@/types'
+import type { ProjectStatus } from '@/types'
 
-export function NewProjectDialog() {
+interface NewProjectDialogProps {
+  triggerClassName?: string
+}
+
+export function NewProjectDialog({ triggerClassName }: NewProjectDialogProps) {
   const [open, setOpen] = useState(false)
   const [name, setName] = useState('')
   const [client, setClient] = useState('')
@@ -42,7 +46,7 @@ export function NewProjectDialog() {
 
   return (
     <Dialog open={open} onOpenChange={(o) => { setOpen(o); if (!o) resetForm() }}>
-      <DialogTrigger render={<Button />}>＋ 新規案件</DialogTrigger>
+      <DialogTrigger render={<Button className={triggerClassName} />}>＋ 新規案件</DialogTrigger>
       <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle>新規案件を作成</DialogTitle>

@@ -13,17 +13,17 @@ export default async function HomePage() {
   const done = all.filter((p) => p.status === 'done')
 
   return (
-    <div className="min-h-screen bg-[#f6f5f2] text-[#1d1d1f]">
-      <header className="sticky top-0 z-10 border-b border-black/5 bg-[#f6f5f2]/80 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-5 sm:px-6">
-          <Image src="/logo.svg" alt="What NOW?" width={148} height={19} priority />
-          <div className="flex items-center gap-3">
-            <NewProjectDialog />
-            <LogoutButton />
+    <div className="min-h-screen bg-[#F9FAFB] text-[#1d1d1f] md:grid md:grid-cols-[248px_minmax(0,1fr)]">
+      <aside className="border-b border-black/5 bg-[#F9FAFB]/90 px-5 py-6 backdrop-blur-xl md:sticky md:top-0 md:h-screen md:border-b-0 md:border-r md:px-6 md:py-14">
+        <div className="flex gap-5 md:h-full md:flex-col md:items-start">
+          <Image className="shrink-0" src="/logo.svg" alt="What NOW?" width={148} height={19} priority />
+          <div className="flex w-full items-start gap-3 md:mt-8 md:flex-1 md:flex-col">
+            <NewProjectDialog triggerClassName="h-12 w-full justify-start rounded-[6px] px-4 text-left text-sm font-semibold shadow-[0_12px_30px_rgba(0,0,0,0.08)]" />
+            <LogoutButton className="h-10 w-full justify-start rounded-[6px] px-4 text-left text-sm text-[#6e6e73] hover:text-[#1d1d1f] md:mt-auto" />
           </div>
         </div>
-      </header>
-      <main className="mx-auto max-w-6xl px-5 py-10 sm:px-6 sm:py-14">
+      </aside>
+      <main className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-6 sm:py-14">
         <ProjectBoard activeProjects={active} doneProjects={done} />
       </main>
     </div>

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
-import { ProjectStatus } from '@/types'
+import type { ProjectStatus } from '@/types'
 import { STATUS_OPTIONS, STATUS_LABELS } from '@/lib/status'
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select'
 import { StatusBadge } from './StatusBadge'
@@ -25,10 +25,10 @@ export function StatusSelector({ projectId, currentStatus }: { projectId: string
   }
 
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex flex-wrap items-center gap-3">
       <StatusBadge status={status} />
       <Select value={status} onValueChange={handleChange} disabled={saving}>
-        <SelectTrigger className="w-40 h-8 text-sm">
+        <SelectTrigger className="h-9 w-40 rounded-[6px] border-black/10 bg-white/70 text-sm text-[#515154]">
           <span>{STATUS_LABELS[status]}</span>
         </SelectTrigger>
         <SelectContent>
@@ -37,7 +37,7 @@ export function StatusSelector({ projectId, currentStatus }: { projectId: string
           ))}
         </SelectContent>
       </Select>
-      {saving && <span className="text-xs text-gray-400">保存中...</span>}
+      {saving && <span className="text-xs text-[#8a8a8f]">保存中...</span>}
     </div>
   )
 }
