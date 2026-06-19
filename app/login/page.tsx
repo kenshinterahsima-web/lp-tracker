@@ -32,13 +32,13 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-start justify-center bg-gray-50" style={{ paddingTop: '18rem' }}>
+    <div className="bg-gray-50" style={{ minHeight: '100dvh', display: 'grid', placeItems: 'center' }}>
       <Card className="w-full max-w-sm">
-        <CardHeader className="flex flex-col items-center gap-2 pb-2">
+        <CardHeader className="flex flex-col items-center gap-2" style={{ padding: '2.5rem 2rem 1.5rem' }}>
           <Image src="/logo.svg" alt="What NOW?" width={148} height={19} priority />
           <p className="text-sm text-gray-500">制作進捗管理</p>
         </CardHeader>
-        <CardContent>
+        <CardContent style={{ padding: '0 2rem 2.5rem' }}>
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">メールアドレス</Label>
@@ -49,7 +49,7 @@ export default function LoginPage() {
               <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required autoComplete="current-password" />
             </div>
             {error && <p className="text-sm text-red-500">{error}</p>}
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full h-12 text-base" disabled={loading}>
               {loading ? 'ログイン中...' : 'ログイン'}
             </Button>
           </form>
