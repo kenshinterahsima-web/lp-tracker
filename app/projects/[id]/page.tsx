@@ -4,10 +4,7 @@ import { createClient } from '@/lib/supabase/server'
 import { Project, Log } from '@/types'
 import { StatusSelector } from '@/components/projects/StatusSelector'
 import { LogForm } from '@/components/projects/LogForm'
-
-function fmt(d: string) {
-  return new Date(d).toLocaleDateString('ja-JP', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
-}
+import { LogList } from '@/components/projects/LogList'
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -55,21 +52,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           <div className="space-y-6">
             <div>
               <h2 className="font-semibold text-gray-900 mb-4">作業履歴 ({logList.length}件)</h2>
-              {logList.length === 0 ? (
-                <p className="text-sm text-gray-400">まだログがありません</p>
-              ) : (
-                <div className="space-y-3">
-                  {logList.map((log) => (
-                    <div key={log.id} className="bg-white rounded-lg border p-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium text-gray-700">{log.author}</span>
-                        <span className="text-xs text-gray-400">{fmt(log.created_at)}</span>
-                      </div>
-                      <p className="text-sm text-gray-700 whitespace-pre-wrap">{log.content}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
+              <LogList logs={logList} projectId={p.id} />
             </div>
             <div className="bg-white rounded-lg border p-6">
               <h2 className="font-semibold text-gray-900 mb-4">作業ログを追加</h2>

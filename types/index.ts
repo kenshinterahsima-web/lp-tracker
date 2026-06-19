@@ -17,5 +17,6 @@ export interface Log {
   project_id: string
   content: string
   author: string
+  done: boolean
   created_at: string
 }
