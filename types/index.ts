@@ -1,4 +1,4 @@
-export type ProjectStatus = 'designing' | 'coding' | 'reviewing' | 'fixing' | 'done'
+export type ProjectStatus = 'designing' | 'coding' | 'waiting_assets' | 'reviewing' | 'fixing' | 'done'
 
 export interface Project {
   id: string
