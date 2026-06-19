@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Log } from '@/types'
 import { deleteLog, toggleLogDone } from '@/app/actions/logs'
 
@@ -10,6 +10,10 @@ function fmt(d: string) {
 
 export function LogList({ logs: initialLogs, projectId }: { logs: Log[]; projectId: string }) {
   const [logs, setLogs] = useState(initialLogs)
+
+  useEffect(() => {
+    setLogs(initialLogs)
+  }, [initialLogs])
 
   async function handleToggle(id: string, current: boolean) {
     setLogs(logs.map(l => l.id === id ? { ...l, done: !current } : l))
