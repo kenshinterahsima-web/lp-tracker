@@ -9,11 +9,11 @@ export const STATUS_LABELS: Record<ProjectStatus, string> = {
 }
 
 export const STATUS_COLORS: Record<ProjectStatus, { bg: string; text: string }> = {
-  designing: { bg: '#A259FF22', text: '#A259FF' },
-  coding:    { bg: '#1ABCFE22', text: '#1ABCFE' },
-  reviewing: { bg: '#F24E1E22', text: '#F24E1E' },
-  fixing:    { bg: '#FF726222', text: '#FF7262' },
-  done:      { bg: '#0ACF8322', text: '#0ACF83' },
+  designing: { bg: '#A259FF', text: '#ffffff' },
+  coding:    { bg: '#1ABCFE', text: '#ffffff' },
+  reviewing: { bg: '#F24E1E', text: '#ffffff' },
+  fixing:    { bg: '#FF7262', text: '#ffffff' },
+  done:      { bg: '#0ACF83', text: '#ffffff' },
 }
 
 export const STATUS_OPTIONS: { value: ProjectStatus; label: string }[] = [
