@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { ReactNode } from 'react'
-import { Project } from '@/types'
+import type { ReactNode } from 'react'
+import type { Project } from '@/types'
 import { StatusBadge } from './StatusBadge'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { cn } from '@/lib/utils'

@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { PointerEvent } from 'react'
 import { GripVertical, RotateCcw } from 'lucide-react'
-import { Project } from '@/types'
+import type { Project } from '@/types'
 import { ProjectCard } from '@/components/projects/ProjectCard'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -52,10 +52,20 @@ interface ProjectBoardProps {
   doneProjects: Project[]
 }
 
+interface DragState {
+  id: string
+  pointerX: number
+  pointerY: number
+  offsetX: number
+  offsetY: number
+  width: number
+  height: number
+}
+
 export function ProjectBoard({ activeProjects, doneProjects }: ProjectBoardProps) {
   const [storedOrder, setStoredOrder] = useState<string[]>([])
   const [active, setActive] = useState(activeProjects)
-  const [draggingId, setDraggingId] = useState<string | null>(null)
+  const [dragState, setDragState] = useState<DragState | null>(null)
   const activeRef = useRef(active)
   const draggingIdRef = useRef<string | null>(null)
 
@@ -70,13 +80,15 @@ export function ProjectBoard({ activeProjects, doneProjects }: ProjectBoardProps
   }, [active])
 
   useEffect(() => {
-    draggingIdRef.current = draggingId
-  }, [draggingId])
+    draggingIdRef.current = dragState?.id ?? null
+  }, [dragState?.id])
 
   useEffect(() => {
-    if (!draggingId) return
+    if (!dragState) return
 
     function handlePointerMove(event: globalThis.PointerEvent) {
+      setDragState((current) => current ? { ...current, pointerX: event.clientX, pointerY: event.clientY } : current)
+
       const target = document.elementFromPoint(event.clientX, event.clientY)
       const projectElement = target?.closest<HTMLElement>('[data-project-id]')
       const targetId = projectElement?.dataset.projectId
@@ -91,22 +103,24 @@ export function ProjectBoard({ activeProjects, doneProjects }: ProjectBoardProps
     }
 
     function handlePointerUp() {
-      setDraggingId(null)
+      setDragState(null)
       persistOrder(activeRef.current)
     }
 
     document.body.classList.add('select-none')
+    document.body.classList.add('cursor-grabbing')
     window.addEventListener('pointermove', handlePointerMove)
     window.addEventListener('pointerup', handlePointerUp, { once: true })
     window.addEventListener('pointercancel', handlePointerUp, { once: true })
 
     return () => {
       document.body.classList.remove('select-none')
+      document.body.classList.remove('cursor-grabbing')
       window.removeEventListener('pointermove', handlePointerMove)
       window.removeEventListener('pointerup', handlePointerUp)
       window.removeEventListener('pointercancel', handlePointerUp)
     }
-  }, [draggingId])
+  }, [dragState?.id])
 
   const done = useMemo(() => sortProjects(doneProjects, storedOrder), [doneProjects, storedOrder])
 
@@ -118,7 +132,21 @@ export function ProjectBoard({ activeProjects, doneProjects }: ProjectBoardProps
 
   function handleDragStart(projectId: string, event: PointerEvent<HTMLButtonElement>) {
     event.preventDefault()
-    setDraggingId(projectId)
+    event.currentTarget.setPointerCapture(event.pointerId)
+    const projectElement = event.currentTarget.closest<HTMLElement>('[data-project-id]')
+    const rect = projectElement?.getBoundingClientRect()
+
+    if (!rect) return
+
+    setDragState({
+      id: projectId,
+      pointerX: event.clientX,
+      pointerY: event.clientY,
+      offsetX: event.clientX - rect.left,
+      offsetY: event.clientY - rect.top,
+      width: rect.width,
+      height: rect.height,
+    })
   }
 
   function handleResetOrder() {
@@ -147,25 +175,45 @@ export function ProjectBoard({ activeProjects, doneProjects }: ProjectBoardProps
               <div
                 key={project.id}
                 data-project-id={project.id}
+                className={cn(
+                  'transition-transform duration-150 ease-out',
+                  dragState?.id === project.id && 'rounded-lg border border-dashed border-gray-200 bg-gray-100/70'
+                )}
+                style={dragState?.id === project.id ? { height: dragState.height } : undefined}
               >
-                <ProjectCard
-                  project={project}
-                  isDragging={draggingId === project.id}
-                  dragHandle={
-                    <button
-                      type="button"
-                      aria-label={`${project.name}を並び替え`}
-                      title="押したままドラッグして並び替え"
-                      className={cn(
-                        'absolute right-3 top-3 z-10 flex size-8 touch-none cursor-grab items-center justify-center rounded-md border border-gray-200 bg-white text-gray-400 shadow-sm transition hover:border-gray-300 hover:text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-300 active:cursor-grabbing',
-                        draggingId === project.id && 'cursor-grabbing text-gray-700'
-                      )}
-                      onPointerDown={(event) => handleDragStart(project.id, event)}
-                    >
-                      <GripVertical className="size-4" aria-hidden="true" />
-                    </button>
+                <div
+                  className={cn(
+                    dragState?.id === project.id && 'pointer-events-none fixed z-50 opacity-100 shadow-xl transition-none'
+                  )}
+                  style={
+                    dragState?.id === project.id
+                      ? {
+                          left: dragState.pointerX - dragState.offsetX,
+                          top: dragState.pointerY - dragState.offsetY,
+                          width: dragState.width,
+                        }
+                      : undefined
                   }
-                />
+                >
+                  <ProjectCard
+                    project={project}
+                    isDragging={dragState?.id === project.id}
+                    dragHandle={
+                      <button
+                        type="button"
+                        aria-label={`${project.name}を並び替え`}
+                        title="押したままドラッグして並び替え"
+                        className={cn(
+                          'absolute right-3 top-3 z-10 flex size-8 touch-none cursor-grab items-center justify-center rounded-md border border-gray-200 bg-white text-gray-400 shadow-sm transition hover:border-gray-300 hover:text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-300 active:cursor-grabbing',
+                          dragState?.id === project.id && 'cursor-grabbing text-gray-700'
+                        )}
+                        onPointerDown={(event) => handleDragStart(project.id, event)}
+                      >
+                        <GripVertical className="size-4" aria-hidden="true" />
+                      </button>
+                    }
+                  />
+                </div>
               </div>
             ))}
           </div>
