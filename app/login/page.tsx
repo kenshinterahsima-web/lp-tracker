@@ -32,7 +32,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex items-start justify-center bg-gray-50 pt-40">
       <Card className="w-full max-w-sm">
         <CardHeader className="flex flex-col items-center gap-2 pb-2">
           <Image src="/logo.svg" alt="What NOW?" width={148} height={19} priority />
